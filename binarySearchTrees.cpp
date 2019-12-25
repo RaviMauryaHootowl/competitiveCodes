@@ -66,9 +66,26 @@ void searchBinaryTreeInterface(BSTNode* root, int valToSearch) {
 		cout << valToSearch << " was found on location " << searchQ << endl;
 }
 
+int findMin(BSTNode* root) {
+	BSTNode* temp = root;
+	while (temp->leftnode != NULL) {
+		temp = temp->leftnode;
+	}
+	return temp->data;
+}
+
+int findMaxRec(BSTNode* root) {
+	if (root->rightnode != NULL) {
+		return findMaxRec(root->rightnode);
+	}
+	else {
+		return root->data;
+	}
+}
+
 int main() {
 	
-	BSTNode* root = new BSTNode();
+	BSTNode* root = NULL;
 	root = insertNode(root ,10);
 	root = insertNode(root, 15);
 	root = insertNode(root, 8);
@@ -76,4 +93,8 @@ int main() {
 	searchBinaryTreeInterface(root, 8);
 	searchBinaryTreeInterface(root, 10);
 	
+	cout << "min is " << findMin(root) << endl;
+	cout << "max using recursion is " << findMaxRec(root) << endl;
+	
+	return 0;
 }
